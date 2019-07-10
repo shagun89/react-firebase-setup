@@ -37,15 +37,25 @@ export function getFcmToken(token){
 }
 
 export function LoginLogout (value, token){
-    var url = 'http://192.168.36.64:8000/accounts/subscribe';
-    let options = {
-        'access_token': "f388f37ba61d365b33d83e48e9d1bdbaefe393a8b5eabfc7d874782c11a0b1df",
-        'Access-Control-Allow-Origin': '*',
-        "Access-Control-Allow-Headers" : "Origin, X-Requested-With, Content-Type, Accept"
-    }
+    
     return (dispatch) => {
+        
         if(!value)
         {
+            var url = 'http://192.168.36.64:8000/accounts/unsubscribe';
+            let options = {
+                'access_token': "f388f37ba61d365b33d83e48e9d1bdbaefe393a8b5eabfc7d874782c11a0b1df",
+                'Access-Control-Allow-Origin': '*',
+                "Access-Control-Allow-Headers" : "Origin, X-Requested-With, Content-Type, Accept"
+            }
+
+            let objToSend = {"fcmToken" : ls.get('fcm_token')}
+            var promise = doHttpPost(url, objToSend, options);
+            promise.then(function (response) { 
+                console.log("Successfully sent ", response)})
+            .catch(function (err) {
+                console.log("some error occured")
+            })
             messaging.deleteToken(ls.get('fcm_token'))
             .then(function () {
                 console.log("token successfully removed")
@@ -57,6 +67,12 @@ export function LoginLogout (value, token){
         }
         else
         {
+            let url = 'http://192.168.36.64:8000/accounts/subscribe';
+            let options = {
+                'access_token': "f388f37ba61d365b33d83e48e9d1bdbaefe393a8b5eabfc7d874782c11a0b1df",
+                'Access-Control-Allow-Origin': '*',
+                "Access-Control-Allow-Headers" : "Origin, X-Requested-With, Content-Type, Accept"
+            }
             
             messaging.requestPermission()
             .then(async function() {
