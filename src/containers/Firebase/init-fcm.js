@@ -2,12 +2,12 @@ import * as firebase from "firebase/app";
 import "firebase/messaging";
 const initializedFirebaseApp = firebase.initializeApp({
 // Project Settings => Add Firebase to your web app
-  messagingSenderId: "302441557166"
+  messagingSenderId: "329966341244"
 });
 const messaging = initializedFirebaseApp.messaging();
 messaging.usePublicVapidKey(
 // Project Settings => Cloud Messaging => Web Push certificates
-  "BFEf8RYqO92vFH-cTnMQxNG6KG975ltW3m3YwbPbmv5s2rQdvHuKO97ABfYgp7zmpdrdeuP15FNT6IOuzuZxQJM"
+  "BEucqp0ZsjZZkmmlSBTbbm0SxSGvlv5m8RHrj0Fmg-WRlGw-fubVZQJJTGZkG-gLF-8Ght0-LNtkTSsvmrBEJD8"
 );
 export { messaging };
 
